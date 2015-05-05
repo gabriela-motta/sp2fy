@@ -96,7 +96,8 @@ public class Album implements Comparable<Album> {
 
 	@Override
 	public String toString() {
-		return this.nome;
+		return "Album: " + this.nome + ", " + this.artista + ", lancado em "
+				+ this.anoLancamento;
 	}
 
 	public String getNome() {
