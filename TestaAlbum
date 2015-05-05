@@ -1,0 +1,129 @@
+package testes;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import classes.*;
+
+public class TestaAlbum {
+
+	@Test
+	public void testAlbum() {
+		try {
+			Album bad = new Album("Bad", "Michael Jackson", 1987);
+			Album nightVisions = new Album("Night Visions", "Imagine Dragons",
+					2012);
+			Album uptownSpecial = new Album("Uptown Special", "Mark Ronson",
+					2015);
+
+			Assert.assertEquals("Bad", bad.getNome());
+			Assert.assertEquals("Michael Jackson", bad.getArtista());
+			Assert.assertEquals(1987, bad.getAnoLancamento());
+			Assert.assertEquals(
+					"Bad",
+					bad.toString());
+
+			Assert.assertEquals("Night Visions", nightVisions.getNome());
+			Assert.assertEquals("Imagine Dragons", nightVisions.getArtista());
+			Assert.assertEquals(2012, nightVisions.getAnoLancamento());
+			Assert.assertEquals(
+					"Night Visions",
+					nightVisions.toString());
+
+			Assert.assertEquals("Uptown Special", uptownSpecial.getNome());
+			Assert.assertEquals("Mark Ronson", uptownSpecial.getArtista());
+			Assert.assertEquals(2015, uptownSpecial.getAnoLancamento());
+			Assert.assertEquals(
+					"Uptown Special",
+					uptownSpecial.toString());
+
+			Album bad25Anniversary = new Album("Bad", "Michael Jackson", 2012);
+			Assert.assertEquals(bad, bad25Anniversary);
+			Assert.assertFalse(bad.equals(uptownSpecial));
+			
+			Assert.assertEquals(0, bad25Anniversary.compareTo(nightVisions));
+			Assert.assertEquals(1, uptownSpecial.compareTo(bad));
+			Assert.assertEquals(-1, nightVisions.compareTo(uptownSpecial));
+
+		} catch (Exception e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testAlbumInvalido() {
+		try {
+			Album tituloInvalido = new Album("", "Michael Jackson", 1987);
+			Assert.fail("Esperava excecao de nome vazio");
+		} catch (Exception e) {
+			Assert.assertEquals("Titulo do album nao pode ser vazio.",
+					e.getMessage());
+		}
+
+		try {
+			Album artistaInvalido = new Album("Night Visions", "", 2012);
+			Assert.fail("Esperava excecao de artista vazio");
+		} catch (Exception e) {
+			Assert.assertEquals("Nome do artista do album nao pode ser vazio.",
+					e.getMessage());
+		}
+
+		try {
+			Album anoInvalido = new Album("Uptown Special", "Mark Ronson", -3);
+			Assert.fail("Esperava excecao de ano de lancamento negativo");
+		} catch (Exception e) {
+			Assert.assertEquals(
+					"Ano de lancamento do album nao pode ser negativo.",
+					e.getMessage());
+		}
+	}
+
+	@Test
+	public void testAdicionaMusica() {
+		try {
+			Musica uptownFunk = new Musica("Uptown Funk", 4, "Funk");
+			Musica manInTheMirror = new Musica("Man In The Mirror", 5, "Pop");
+			Musica smoothCriminal = new Musica("Smooth Criminal", 4, "Pop");
+
+			Album bad = new Album("Bad", "Michael Jackson", 1987);
+			Album uptownSpecial = new Album("Uptown Special", "Mark Ronson",
+					2015);
+
+			uptownSpecial.adicionaMusica(uptownFunk);
+			Assert.assertEquals(1, uptownSpecial.getFaixas().size());
+			Assert.assertEquals(4, uptownSpecial.getDuracaoTotal());
+
+			bad.adicionaMusica(smoothCriminal);
+			bad.adicionaMusica(manInTheMirror);
+			Assert.assertEquals(2, bad.getFaixas().size());
+			Assert.assertEquals(9, bad.getDuracaoTotal());
+
+		} catch (Exception e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testRemoveMusica() {
+		try {
+			Musica demons = new Musica("Demons", 3, "Indie");
+			Musica radioactive = new Musica("Radioactive", 3,
+					"Rock Alternativo");
+			Musica bad = new Musica("Bad", 4, "Pop");
+
+			Album nightVisions = new Album("Night Visions", "Imagine Dragons",
+					2012);
+
+			nightVisions.adicionaMusica(radioactive);
+			nightVisions.adicionaMusica(demons);
+			nightVisions.adicionaMusica(bad);
+
+			nightVisions.removeFaixa(3);
+			Assert.assertEquals(6, nightVisions.getDuracaoTotal());
+			Assert.assertEquals(2, nightVisions.getFaixas().size());
+			
+		} catch (Exception e) {
+			Assert.fail();
+		}
+	}
+}
