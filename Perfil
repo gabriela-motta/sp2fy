@@ -2,6 +2,7 @@ package classes;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Perfil {
@@ -22,13 +23,12 @@ public class Perfil {
 	 * @throws Exception
 	 *             Se o nome for vazio
 	 */
-	public Perfil(String nome, Album album) throws Exception {
+	public Perfil(String nome) throws Exception {
 		if (nome.equals("")) {
 			throw new Exception("Nome do perfil nao pode ser vazio.");
 		}
 		this.nome = nome;
 		Perfil.albuns = new ArrayList<Album>();
-		albuns.add(album);
 		this.favoritos = new ArrayList<Album>();
 	}
 
@@ -53,8 +53,20 @@ public class Perfil {
 			this.favoritos.add(album);
 		}
 	}
-	
-	public static void ordenaAlbunsPorAno(){
+
+	public void adicionaPlaylist(String nomePlaylist, String nomeAlbum,
+			int faixa) throws Exception {
+
+		if (playlists.containsKey(nomePlaylist)) {
+			Playlist atualPlaylist = playlists.get(nomePlaylist);
+
+			if (albuns.contains(nomeAlbum)) {
+
+			}
+		}
+	}
+
+	public static void ordenaAlbuns() {
 		Collections.sort(albuns);
 	}
 
