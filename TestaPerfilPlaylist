@@ -1,0 +1,86 @@
+package testes;
+
+import java.util.ArrayList;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import classes.*;
+
+public class TestaPerfilPlaylist {
+
+	@Test
+	public void testPlaylist() {
+		try {
+			Playlist paraRelaxar = new Playlist("Para Relaxar");
+
+			Assert.assertEquals("Para Relaxar", paraRelaxar.getNome());
+			Assert.assertEquals(0, paraRelaxar.getMusicas().size());
+
+		} catch (Exception e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testPlaylistInvalida() {
+		try {
+			Playlist nomeInvalido = new Playlist("");
+			Assert.fail("Esperava excecao de nome vazio");
+
+		} catch (Exception e) {
+			Assert.assertEquals("Nome da playlist nao pode ser vazio.",
+					e.getMessage());
+		}
+	}
+	
+	/*@Test
+	public void testAdicionaPlaylist(){
+		try{
+			Musica colors = new Musica("Colors", 4, "EDM");
+			Musica youngAgain = new Musica("Young Again", 4, "EDM");
+			Musica loversOnTheSun = new Musica("Lovers On The Sun", 3, "EDM");
+			
+			Album unitedWeAre = new Album("United We Are", "Hardwell", 2015);
+			Album listen = new Album("Listen", "David Guetta", 2014);
+			
+			unitedWeAre.adicionaMusica(youngAgain);
+			unitedWeAre.adicionaMusica(colors);
+			listen.adicionaMusica(loversOnTheSun);
+			
+			Playlist tomorrowlandBrasil = new Playlist("Tomorrowland Brasil");
+			
+			Perfil gabriela = new Perfil("Gabriela", unitedWeAre);
+			
+			gabriela.adicionaAlbum(listen);
+			gabriela.adicionaAosFavoritos(listen);
+			
+			gabriela.adicionaPlaylist("Tomorrowland Brasil", "United We Are", 2);
+			Assert.assertEquals(1, gabriela.getPlaylists().size());
+			
+		} catch (Exception e){
+			Assert.fail();
+		}
+	}*/
+	
+	@Test
+	public void testOrdenaAlbuns(){
+		try {
+			Album unitedWeAre = new Album("United We Are", "Hardwell", 2015);
+			Album listen = new Album("Listen", "David Guetta", 2014);
+			Album eighteenMonths = new Album("18 Months", "Calvin Harris", 2012);
+			
+			Perfil gabriela = new Perfil("Gabriela", unitedWeAre);
+			
+			gabriela.adicionaAlbum(listen);
+			gabriela.adicionaAlbum(eighteenMonths);
+			gabriela.adicionaAosFavoritos(listen);
+			
+			Perfil.ordenaAlbunsPorAno();
+			
+		} catch (Exception e) {
+			Assert.fail();
+		}
+
+	}
+}
