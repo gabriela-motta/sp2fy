@@ -18,8 +18,6 @@ public class Perfil {
 	 * 
 	 * @param nome
 	 *            O nome do perfil
-	 * @param album
-	 *            O nome do album vazio inicial do perfil
 	 * @throws Exception
 	 *             Se o nome for vazio
 	 */
