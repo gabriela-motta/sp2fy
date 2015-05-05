@@ -19,28 +19,27 @@ public class TestaAlbum {
 			Assert.assertEquals("Bad", bad.getNome());
 			Assert.assertEquals("Michael Jackson", bad.getArtista());
 			Assert.assertEquals(1987, bad.getAnoLancamento());
-			Assert.assertEquals(
-					"Bad",
+			Assert.assertEquals("Album: Bad, Michael Jackson, lancado em 1987",
 					bad.toString());
 
 			Assert.assertEquals("Night Visions", nightVisions.getNome());
 			Assert.assertEquals("Imagine Dragons", nightVisions.getArtista());
 			Assert.assertEquals(2012, nightVisions.getAnoLancamento());
 			Assert.assertEquals(
-					"Night Visions",
+					"Album: Night Visions, Imagine Dragons, lancado em 2012",
 					nightVisions.toString());
 
 			Assert.assertEquals("Uptown Special", uptownSpecial.getNome());
 			Assert.assertEquals("Mark Ronson", uptownSpecial.getArtista());
 			Assert.assertEquals(2015, uptownSpecial.getAnoLancamento());
 			Assert.assertEquals(
-					"Uptown Special",
+					"Album: Uptown Special, Mark Ronson, lancado em 2015",
 					uptownSpecial.toString());
 
 			Album bad25Anniversary = new Album("Bad", "Michael Jackson", 2012);
 			Assert.assertEquals(bad, bad25Anniversary);
 			Assert.assertFalse(bad.equals(uptownSpecial));
-			
+
 			Assert.assertEquals(0, bad25Anniversary.compareTo(nightVisions));
 			Assert.assertEquals(1, uptownSpecial.compareTo(bad));
 			Assert.assertEquals(-1, nightVisions.compareTo(uptownSpecial));
@@ -121,7 +120,7 @@ public class TestaAlbum {
 			nightVisions.removeFaixa(3);
 			Assert.assertEquals(6, nightVisions.getDuracaoTotal());
 			Assert.assertEquals(2, nightVisions.getFaixas().size());
-			
+
 		} catch (Exception e) {
 			Assert.fail();
 		}
