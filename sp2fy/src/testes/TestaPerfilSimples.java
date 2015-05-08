@@ -1,11 +1,31 @@
 package testes;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import classes.*;
 
 public class TestaPerfilSimples {
+	
+	private Perfil gabriela;
+	private Album x;
+	private Album dontKillTheMagic;
+	private Album badBlood;
+	
+	@Before
+	public void setUp(){
+		try {
+			gabriela = new Perfil("Gabriela");
+			x = new Album("X", "Ed Sheeran", 2014);
+			dontKillTheMagic = new Album("Don't Kill The Magic", "Magic!", 2014);
+			badBlood = new Album("Bad Blood", "Bastille", 2013);
+			
+		} catch (Exception e) {
+			Assert.fail();
+		}
+
+	}
 
 	@Test
 	public void testPerfil() {
@@ -36,11 +56,6 @@ public class TestaPerfilSimples {
 	@Test
 	public void testAdicionaAlbum() {
 		try {
-			Album dontKillTheMagic = new Album("Don't Kill The Magic",
-					"Magic!", 2014);
-			Album x = new Album("X", "Ed Sheeran", 2014);
-
-			Perfil gabriela = new Perfil("Gabriela");
 			gabriela.adicionaAlbum(dontKillTheMagic);
 			gabriela.adicionaAlbum(x);
 
@@ -53,11 +68,6 @@ public class TestaPerfilSimples {
 	@Test
 	public void testAdicionaAosFavoritos() {
 		try {
-			Album dontKillTheMagic = new Album("Don't Kill The Magic",
-					"Magic!", 2014);
-			Album badBlood = new Album("Bad Blood", "Bastille", 2013);
-
-			Perfil gabriela = new Perfil("Gabriela");
 			gabriela.adicionaAlbum(dontKillTheMagic);
 
 			gabriela.adicionaAosFavoritos(dontKillTheMagic);

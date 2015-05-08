@@ -12,9 +12,6 @@ public class TestaAlbum {
 	private Album nightVisions;
 	private Album uptownSpecial;
 	private Album bad25Anniversary;
-	private Album tituloInvalido;
-	private Album artistaInvalido;
-	private Album anoInvalido;
 
 	private Musica demons;
 	private Musica radioactive;
@@ -81,7 +78,7 @@ public class TestaAlbum {
 	@Test
 	public void testAlbumInvalido() {
 		try {
-			tituloInvalido = new Album("", "Michael Jackson", 1987);
+			Album tituloInvalido = new Album("", "Michael Jackson", 1987);
 			Assert.fail("Esperava excecao de nome vazio");
 		} catch (Exception e) {
 			Assert.assertEquals("Titulo do album nao pode ser vazio.",
@@ -89,7 +86,7 @@ public class TestaAlbum {
 		}
 
 		try {
-			artistaInvalido = new Album("Night Visions", "", 2012);
+			Album artistaInvalido = new Album("Night Visions", "", 2012);
 			Assert.fail("Esperava excecao de artista vazio");
 		} catch (Exception e) {
 			Assert.assertEquals("Nome do artista do album nao pode ser vazio.",
@@ -97,7 +94,7 @@ public class TestaAlbum {
 		}
 
 		try {
-			anoInvalido = new Album("Uptown Special", "Mark Ronson", -3);
+			Album anoInvalido = new Album("Uptown Special", "Mark Ronson", -3);
 			Assert.fail("Esperava excecao de ano de lancamento negativo");
 		} catch (Exception e) {
 			Assert.assertEquals(

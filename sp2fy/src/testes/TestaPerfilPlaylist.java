@@ -1,7 +1,5 @@
 package testes;
 
-import java.util.ArrayList;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,17 +19,12 @@ public class TestaPerfilPlaylist {
 	private Album listen;
 	private Album eighteenMonths;
 
-	private Playlist paraRelaxar;
-	private Playlist nomeInvalido;
-
 	private Perfil gabriela;
 
 	@Before
 	public void setUp() {
 		try {
 			gabriela = new Perfil("Gabriela");
-
-			paraRelaxar = new Playlist("Para Relaxar");
 
 			colors = new Musica("Colors", 4, "EDM");
 			youngAgain = new Musica("Young Again", 5, "EDM");
@@ -48,29 +41,6 @@ public class TestaPerfilPlaylist {
 			Assert.fail();
 		}
 
-	}
-
-	@Test
-	public void testPlaylist() {
-		try {
-			Assert.assertEquals("Para Relaxar", paraRelaxar.getNome());
-			Assert.assertEquals(0, paraRelaxar.getMusicas().size());
-
-		} catch (Exception e) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testPlaylistInvalida() {
-		try {
-			nomeInvalido = new Playlist("");
-			Assert.fail("Esperava excecao de nome vazio");
-
-		} catch (Exception e) {
-			Assert.assertEquals("Nome da playlist nao pode ser vazio.",
-					e.getMessage());
-		}
 	}
 
 	/*

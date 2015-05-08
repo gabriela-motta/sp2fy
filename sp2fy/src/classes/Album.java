@@ -1,7 +1,6 @@
 package classes;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Album implements Comparable<Album> {
 

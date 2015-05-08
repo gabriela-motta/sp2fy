@@ -3,7 +3,7 @@ package classes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.Map;
 
 public class Perfil {
@@ -12,7 +12,7 @@ public class Perfil {
 	private String nome;
 	private ArrayList<Album> albuns;
 	private ArrayList<Album> favoritos;
-	private Map<String, Playlist> playlists;
+	private Map<String, HashSet<Musica>> playlists;
 
 	/**
 	 * Construtor de perfil
@@ -54,7 +54,7 @@ public class Perfil {
 	}
 
 	public void adicionaPlaylist(String nomePlaylist, String nomeAlbum, int faixa) throws Exception {
-		Playlist atualPlaylist;
+		HashSet<Musica> atualPlaylist;
 		Album atualAlbum;
 		Musica atualFaixa;
 		
@@ -62,7 +62,7 @@ public class Perfil {
 			atualPlaylist = this.playlists.get(nomePlaylist);
 			
 		}else {
-			Playlist vazia = new Playlist(nomePlaylist);
+			HashSet<Musica> vazia = new HashSet<Musica>();
 			playlists.put(nomePlaylist, vazia);
 		}
 		
@@ -149,11 +149,11 @@ public class Perfil {
 		this.favoritos = favoritos;
 	}
 
-	public Map<String, Playlist> getPlaylists() {
+	public Map<String, HashSet<Musica>> getPlaylists() {
 		return playlists;
 	}
 
-	public void setPlaylists(Map<String, Playlist> playlists) {
+	public void setPlaylists(Map<String, HashSet<Musica>> playlists) {
 		this.playlists = playlists;
 	}
 
