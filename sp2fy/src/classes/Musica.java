@@ -2,7 +2,6 @@ package classes;
 
 public class Musica {
 
-	// atributos
 	private String nome;
 	private int duracao;
 	private String genero;
@@ -53,10 +52,10 @@ public class Musica {
 	 */
 	@Override
 	public String toString() {
-		return "Musica: " + this.nome + ", " + this.duracao + " min, " + this.genero;
+		return "Musica: " + this.nome + ", " + this.duracao + " min, "
+				+ this.genero;
 	}
 
-	// gets e sets
 	public String getNome() {
 		return nome;
 	}
@@ -81,7 +80,6 @@ public class Musica {
 		this.genero = genero;
 	}
 
-	// hashcode
 	@Override
 	public int hashCode() {
 		final int prime = 31;

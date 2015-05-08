@@ -88,7 +88,7 @@ public class TestaPerfilPlaylist {
 			Assert.assertEquals(listen, gabriela.getAlbuns().get(0));
 			Assert.assertEquals(unitedWeAre, gabriela.getAlbuns().get(1));
 			Assert.assertEquals(eighteenMonths, gabriela.getAlbuns().get(2));
-			
+
 		} catch (Exception e) {
 			Assert.fail();
 		}

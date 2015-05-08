@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Album implements Comparable<Album> {
 
-	// atributos
 	private String nome;
 	private String artista;
 	private int duracaoTotal;
@@ -84,6 +83,10 @@ public class Album implements Comparable<Album> {
 		return false;
 	}
 
+	/**
+	 * Compara o ano de lancamento de dois albuns para ver qual o maior durante
+	 * uma ordenacao
+	 */
 	public int compareTo(Album outroAlbum) {
 		if (this.getAnoLancamento() > outroAlbum.getAnoLancamento()) {
 			return 1;
@@ -94,6 +97,9 @@ public class Album implements Comparable<Album> {
 		}
 	}
 
+	/**
+	 * Retorna uma String que representa o album
+	 */
 	@Override
 	public String toString() {
 		return "Album: " + this.nome + ", " + this.artista + ", lancado em "

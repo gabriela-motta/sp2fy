@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class Perfil {
 
-	// atributos
 	private String nome;
 	private ArrayList<Album> albuns;
 	private ArrayList<Album> favoritos;
@@ -53,31 +52,49 @@ public class Perfil {
 		}
 	}
 
-	public void adicionaPlaylist(String nomePlaylist, String nomeAlbum, int faixa) throws Exception {
+	/**
+	 * Adiciona uma musica em uma playlist
+	 * 
+	 * @param nomePlaylist
+	 *            A playlist
+	 * @param nomeAlbum
+	 *            O album que contem a musica
+	 * @param faixa
+	 *            O numero da musica no album
+	 * @throws Exception
+	 *             Se o album nao pertencer ao perfil
+	 */
+	public void adicionaPlaylist(String nomePlaylist, String nomeAlbum,
+			int faixa) throws Exception {
 		HashSet<Musica> atualPlaylist;
 		Album atualAlbum;
 		Musica atualFaixa;
-		
-		if (this.playlists.containsKey(nomePlaylist)){
+
+		if (this.playlists.containsKey(nomePlaylist)) {
 			atualPlaylist = this.playlists.get(nomePlaylist);
-			
-		}else {
+
+		} else {
 			HashSet<Musica> vazia = new HashSet<Musica>();
 			playlists.put(nomePlaylist, vazia);
 		}
-		
-		if (this.albuns.contains(nomeAlbum)){
-			
-			
-		} else{
+
+		if (this.albuns.contains(nomeAlbum)) {
+
+		} else {
 			throw new Exception("Album nao pertence ao perfil especificado.");
 		}
 	}
 
+	/**
+	 * Ordena a lista de albuns por ano usando o compareTo de album
+	 */
 	public void ordenaAlbunsPorAno() {
 		Collections.sort(albuns);
 	}
 
+	/**
+	 * Ordena a lista de albuns por duracao total usando comparator
+	 */
 	public void ordenaAlbunsPorDuracao() {
 		Collections.sort(albuns, new Comparator<Album>() {
 
@@ -94,6 +111,9 @@ public class Perfil {
 		});
 	}
 
+	/**
+	 * Ordena a lista de albuns por quantidade de musicas usando comparator
+	 */
 	public void ordenaAlbunsPorQuantidade() {
 		Collections.sort(albuns, new Comparator<Album>() {
 
@@ -111,6 +131,9 @@ public class Perfil {
 		});
 	}
 
+	/**
+	 * Verifica se dois perfis sao iguais comparando o nome
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Perfil) {
@@ -120,6 +143,9 @@ public class Perfil {
 		return false;
 	}
 
+	/**
+	 * Retorna uma String que representa o perfil
+	 */
 	@Override
 	public String toString() {
 		return "Perfil: " + this.nome;
