@@ -64,11 +64,9 @@ public class Perfil {
 	 *         encontrado
 	 */
 	public Album procuraAlbum(String nome) {
-		Iterator<Album> iterator = albuns.iterator();
-		Album albumProcurado = iterator.next();
-		while (iterator.hasNext()) {			
-			if (iterator.next().getNome().equals(nome)) {
-				return albumProcurado;
+		for (Album album: albuns){
+			if (album.getNome().equals(nome)){
+				return album;
 			}
 		}
 		return null;

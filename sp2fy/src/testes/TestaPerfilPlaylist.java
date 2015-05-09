@@ -70,9 +70,17 @@ public class TestaPerfilPlaylist {
 			Assert.assertEquals(1, gabriela.getPlaylists().size());
 			Assert.assertTrue(gabriela.getPlaylists().containsKey("Tomorrowland Brasil"));
 			Assert.assertTrue(gabriela.getPlaylists().get("Tomorrowland Brasil").contains(colors));
-
+			
+			gabriela.adicionaPlaylist("Tomorrowland Brasil", "Listen", 1);
+			Assert.assertEquals(1, gabriela.getPlaylists().size());
+			
+			gabriela.adicionaPlaylist("Top 100 Brasil", "Listen", 1);
+			Assert.assertEquals(2, gabriela.getPlaylists().size());
+			
+			gabriela.adicionaPlaylist("Top 100 Brasil", "Bad", 1);
+			
 		} catch (Exception e) {
-			Assert.fail();
+			Assert.assertEquals("Album nao pertence ao perfil especificado.", e.getMessage());
 		}
 	}
 
