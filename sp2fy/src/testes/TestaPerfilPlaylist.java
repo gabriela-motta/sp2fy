@@ -42,20 +42,39 @@ public class TestaPerfilPlaylist {
 		}
 
 	}
+	
+	@Test
+	public void testProcuraAlbum(){
+		try{
+			gabriela.adicionaAlbum(eighteenMonths);
+			
+			Assert.assertEquals(eighteenMonths, gabriela.procuraAlbum("18 Months"));
+			Assert.assertEquals(null, gabriela.procuraAlbum("Listen"));
+			
+		}catch (Exception e){
+			
+		}
+	}
 
-	/*
-	 * @Test public void testAdicionaPlaylist(){ try{
-	 * unitedWeAre.adicionaMusica(youngAgain);
-	 * unitedWeAre.adicionaMusica(colors);
-	 * listen.adicionaMusica(loversOnTheSun);
-	 * 
-	 * gabriela.adicionaAlbum(listen); gabriela.adicionaAosFavoritos(listen);
-	 * 
-	 * gabriela.adicionaPlaylist("Tomorrowland Brasil", "United We Are", 2);
-	 * Assert.assertEquals(1, gabriela.getPlaylists().size());
-	 * 
-	 * } catch (Exception e){ Assert.fail(); } }
-	 */
+	@Test
+	public void testAdicionaPlaylist() {
+		try {
+			unitedWeAre.adicionaMusica(youngAgain);
+			unitedWeAre.adicionaMusica(colors);
+			listen.adicionaMusica(loversOnTheSun);
+
+			gabriela.adicionaAlbum(unitedWeAre);
+			gabriela.adicionaAlbum(listen);
+
+			gabriela.adicionaPlaylist("Tomorrowland Brasil", "United We Are", 2);
+			Assert.assertEquals(1, gabriela.getPlaylists().size());
+			Assert.assertTrue(gabriela.getPlaylists().containsKey("Tomorrowland Brasil"));
+			Assert.assertTrue(gabriela.getPlaylists().get("Tomorrowland Brasil").contains(colors));
+
+		} catch (Exception e) {
+			Assert.fail();
+		}
+	}
 
 	@Test
 	public void testOrdenaAlbuns() {

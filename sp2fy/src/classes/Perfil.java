@@ -3,7 +3,9 @@ package classes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Perfil {
@@ -11,7 +13,7 @@ public class Perfil {
 	private String nome;
 	private ArrayList<Album> albuns;
 	private ArrayList<Album> favoritos;
-	private Map<String, HashSet<Musica>> playlists;
+	private HashMap<String, HashSet<Musica>> playlists;
 
 	/**
 	 * Construtor de perfil
@@ -28,6 +30,7 @@ public class Perfil {
 		this.nome = nome;
 		this.albuns = new ArrayList<Album>();
 		this.favoritos = new ArrayList<Album>();
+		this.playlists = new HashMap<String, HashSet<Musica>>();
 	}
 
 	/**
@@ -53,6 +56,25 @@ public class Perfil {
 	}
 
 	/**
+	 * Procura um album na lista de albuns recebendo um nome
+	 * 
+	 * @param nome
+	 *            O nome do album a ser procurado
+	 * @return albumProcurado se o album for encontrado, null se o album nao for
+	 *         encontrado
+	 */
+	public Album procuraAlbum(String nome) {
+		Iterator<Album> iterator = albuns.iterator();
+		Album albumProcurado = iterator.next();
+		while (iterator.hasNext()) {			
+			if (iterator.next().getNome().equals(nome)) {
+				return albumProcurado;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Adiciona uma musica em uma playlist
 	 * 
 	 * @param nomePlaylist
@@ -74,14 +96,19 @@ public class Perfil {
 			atualPlaylist = this.playlists.get(nomePlaylist);
 
 		} else {
-			HashSet<Musica> vazia = new HashSet<Musica>();
-			playlists.put(nomePlaylist, vazia);
+			atualPlaylist = new HashSet<Musica>();
 		}
 
-		if (this.albuns.contains(nomeAlbum)) {
+		atualAlbum = procuraAlbum(nomeAlbum);
+
+		if (atualAlbum == null) {
+			throw new Exception("Album nao pertence ao perfil especificado.");
 
 		} else {
-			throw new Exception("Album nao pertence ao perfil especificado.");
+			atualFaixa = atualAlbum.getFaixas().get(faixa - 1);
+
+			atualPlaylist.add(atualFaixa);
+			playlists.put(nomePlaylist, atualPlaylist);
 		}
 	}
 
@@ -179,7 +206,7 @@ public class Perfil {
 		return playlists;
 	}
 
-	public void setPlaylists(Map<String, HashSet<Musica>> playlists) {
+	public void setPlaylists(HashMap<String, HashSet<Musica>> playlists) {
 		this.playlists = playlists;
 	}
 
