@@ -1,11 +1,12 @@
 package classes;
 
+//114110443 - Gabriela Motta Oliveira - LAB 4 - Turma 3
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 
 public class Perfil {
@@ -64,8 +65,8 @@ public class Perfil {
 	 *         encontrado
 	 */
 	public Album procuraAlbum(String nome) {
-		for (Album album: albuns){
-			if (album.getNome().equals(nome)){
+		for (Album album : albuns) {
+			if (album.getNome().equals(nome)) {
 				return album;
 			}
 		}

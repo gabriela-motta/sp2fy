@@ -1,5 +1,7 @@
 package testes;
 
+// 114110443 - Gabriela Motta Oliveira - LAB 4 - Turma 3
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,17 +44,18 @@ public class TestaPerfilPlaylist {
 		}
 
 	}
-	
+
 	@Test
-	public void testProcuraAlbum(){
-		try{
+	public void testProcuraAlbum() {
+		try {
 			gabriela.adicionaAlbum(eighteenMonths);
-			
-			Assert.assertEquals(eighteenMonths, gabriela.procuraAlbum("18 Months"));
+
+			Assert.assertEquals(eighteenMonths,
+					gabriela.procuraAlbum("18 Months"));
 			Assert.assertEquals(null, gabriela.procuraAlbum("Listen"));
-			
-		}catch (Exception e){
-			
+
+		} catch (Exception e) {
+
 		}
 	}
 
@@ -68,19 +71,22 @@ public class TestaPerfilPlaylist {
 
 			gabriela.adicionaPlaylist("Tomorrowland Brasil", "United We Are", 2);
 			Assert.assertEquals(1, gabriela.getPlaylists().size());
-			Assert.assertTrue(gabriela.getPlaylists().containsKey("Tomorrowland Brasil"));
-			Assert.assertTrue(gabriela.getPlaylists().get("Tomorrowland Brasil").contains(colors));
-			
+			Assert.assertTrue(gabriela.getPlaylists().containsKey(
+					"Tomorrowland Brasil"));
+			Assert.assertTrue(gabriela.getPlaylists()
+					.get("Tomorrowland Brasil").contains(colors));
+
 			gabriela.adicionaPlaylist("Tomorrowland Brasil", "Listen", 1);
 			Assert.assertEquals(1, gabriela.getPlaylists().size());
-			
+
 			gabriela.adicionaPlaylist("Top 100 Brasil", "Listen", 1);
 			Assert.assertEquals(2, gabriela.getPlaylists().size());
-			
+
 			gabriela.adicionaPlaylist("Top 100 Brasil", "Bad", 1);
-			
+
 		} catch (Exception e) {
-			Assert.assertEquals("Album nao pertence ao perfil especificado.", e.getMessage());
+			Assert.assertEquals("Album nao pertence ao perfil especificado.",
+					e.getMessage());
 		}
 	}
 

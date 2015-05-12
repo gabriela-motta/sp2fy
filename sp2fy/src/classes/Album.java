@@ -1,5 +1,7 @@
 package classes;
 
+//114110443 - Gabriela Motta Oliveira - LAB 4 - Turma 3
+
 import java.util.ArrayList;
 
 public class Album implements Comparable<Album> {

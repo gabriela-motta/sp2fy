@@ -1,5 +1,7 @@
 package testes;
 
+//114110443 - Gabriela Motta Oliveira - LAB 4 - Turma 3
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,20 +9,20 @@ import org.junit.Test;
 import classes.*;
 
 public class TestaPerfilSimples {
-	
+
 	private Perfil gabriela;
 	private Album x;
 	private Album dontKillTheMagic;
 	private Album badBlood;
-	
+
 	@Before
-	public void setUp(){
+	public void setUp() {
 		try {
 			gabriela = new Perfil("Gabriela");
 			x = new Album("X", "Ed Sheeran", 2014);
 			dontKillTheMagic = new Album("Don't Kill The Magic", "Magic!", 2014);
 			badBlood = new Album("Bad Blood", "Bastille", 2013);
-			
+
 		} catch (Exception e) {
 			Assert.fail();
 		}
