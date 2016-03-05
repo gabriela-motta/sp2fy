@@ -14,7 +14,7 @@ public class TestaPerfilSimples {
 	private Album x;
 	private Album dontKillTheMagic;
 	private Album badBlood;
-
+	
 	@Before
 	public void setUp() {
 		try {
@@ -32,11 +32,11 @@ public class TestaPerfilSimples {
 	@Test
 	public void testPerfil() {
 		try {
-			Perfil gabriela = new Perfil("Gabriela");
-			Assert.assertEquals("Gabriela", gabriela.getNome());
-			Assert.assertEquals("Perfil: Gabriela", gabriela.toString());
-			Assert.assertEquals(0, gabriela.getAlbuns().size());
-			Assert.assertEquals(0, gabriela.getFavoritos().size());
+			Perfil maria = new Perfil("Maria");
+			Assert.assertEquals("Maria", maria.getNome());
+			Assert.assertEquals("Perfil: Maria", maria.toString());
+			Assert.assertEquals(0, maria.getAlbuns().size());
+			Assert.assertEquals(0, maria.getFavoritos().size());
 
 		} catch (Exception e) {
 			Assert.fail();
@@ -77,7 +77,7 @@ public class TestaPerfilSimples {
 			Assert.assertEquals(1, gabriela.getFavoritos().size());
 
 		} catch (Exception e) {
-			Assert.fail();
+			Assert.assertEquals("Nao pode adicionar Bad Blood aos favoritos pois nao pertence ao perfil.", e.getMessage());
 		}
 	}
 

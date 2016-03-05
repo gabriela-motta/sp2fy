@@ -52,10 +52,10 @@ public class TestaPerfilPlaylist {
 
 			Assert.assertEquals(eighteenMonths,
 					gabriela.procuraAlbum("18 Months"));
-			Assert.assertEquals(null, gabriela.procuraAlbum("Listen"));
+			gabriela.procuraAlbum("Listen");
 
 		} catch (Exception e) {
-
+			Assert.assertEquals("Album nao pertence ao perfil especificado.", e.getMessage());
 		}
 	}
 

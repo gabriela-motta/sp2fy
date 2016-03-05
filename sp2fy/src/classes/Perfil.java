@@ -49,11 +49,13 @@ public class Perfil {
 	 * 
 	 * @param album
 	 *            O album a ser adicionado aos favoritos
+	 * @throws Exception 
 	 */
-	public void adicionaAosFavoritos(Album album) {
-		if (this.albuns.contains(album)) {
-			this.favoritos.add(album);
+	public void adicionaAosFavoritos(Album album) throws Exception {
+		if (!this.albuns.contains(album)) {
+			throw new Exception("Nao pode adicionar " + album.getNome() + " aos favoritos pois nao pertence ao perfil.");
 		}
+		this.favoritos.add(album);
 	}
 
 	/**

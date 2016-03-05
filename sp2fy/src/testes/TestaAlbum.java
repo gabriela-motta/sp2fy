@@ -111,6 +111,8 @@ public class TestaAlbum {
 			uptownSpecial.adicionaMusica(uptownFunk);
 			Assert.assertEquals(1, uptownSpecial.getFaixas().size());
 			Assert.assertEquals(4, uptownSpecial.getDuracaoTotal());
+			
+			uptownSpecial.adicionaMusica(uptownFunk);
 
 			bad.adicionaMusica(smoothCriminal);
 			bad.adicionaMusica(manInTheMirror);
@@ -118,7 +120,7 @@ public class TestaAlbum {
 			Assert.assertEquals(9, bad.getDuracaoTotal());
 
 		} catch (Exception e) {
-			Assert.fail();
+			Assert.assertEquals("Uptown Funk ja esta no album.", e.getMessage());
 		}
 	}
 

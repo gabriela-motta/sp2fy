@@ -53,8 +53,12 @@ public class Album implements Comparable<Album> {
 	 * 
 	 * @param musica
 	 *            A musica a ser adicionada
+	 * @throws Exception 
 	 */
-	public void adicionaMusica(Musica musica) {
+	public void adicionaMusica(Musica musica) throws Exception {
+		if(this.faixas.contains(musica)){
+			throw new Exception(musica.getNome() + " ja esta no album.");
+		}
 		this.faixas.add(musica);
 		this.duracaoTotal = this.duracaoTotal + musica.getDuracao();
 	}
