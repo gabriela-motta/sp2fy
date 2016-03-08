@@ -22,15 +22,15 @@ public class Musica {
 	 *             negativa
 	 */
 	public Musica(String nome, int duracao, String genero) throws Exception {
-		if (nome.equals("")) {
+		if (nome.equals("")) 
 			throw new Exception("Titulo da musica nao pode ser vazio.");
-		}
-		if (duracao < 0) {
+		
+		if (duracao < 0) 
 			throw new Exception("Duracao da musica nao pode ser negativa.");
-		}
-		if (genero.equals("")) {
+		
+		if (genero.equals("")) 
 			throw new Exception("Genero da musica nao pode ser vazio.");
-		}
+		
 		this.nome = nome;
 		this.duracao = duracao;
 		this.genero = genero;
@@ -43,6 +43,7 @@ public class Musica {
 	public boolean equals(Object obj) {
 		if (obj instanceof Musica) {
 			Musica outraMusica = (Musica) obj;
+			
 			return this.getNome().equals(outraMusica.getNome())
 					&& this.getDuracao() == outraMusica.getDuracao();
 		}
@@ -62,24 +63,12 @@ public class Musica {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public int getDuracao() {
 		return duracao;
 	}
 
-	public void setDuracao(int duracao) {
-		this.duracao = duracao;
-	}
-
 	public String getGenero() {
 		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
 	}
 
 	@Override

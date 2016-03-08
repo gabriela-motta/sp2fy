@@ -13,8 +13,8 @@ public class Perfil {
 
 	private String nome;
 	private ArrayList<Album> albuns;
-	private ArrayList<Album> favoritos;
-	private HashMap<String, HashSet<Musica>> playlists;
+	private HashSet<Album> favoritos;
+	private HashMap<String, ArrayList<Musica>> playlists;
 
 	/**
 	 * Construtor de perfil
@@ -25,13 +25,13 @@ public class Perfil {
 	 *             Se o nome for vazio
 	 */
 	public Perfil(String nome) throws Exception {
-		if (nome.equals("")) {
+		if (nome.equals("")) 
 			throw new Exception("Nome do perfil nao pode ser vazio.");
-		}
+		
 		this.nome = nome;
 		this.albuns = new ArrayList<Album>();
-		this.favoritos = new ArrayList<Album>();
-		this.playlists = new HashMap<String, HashSet<Musica>>();
+		this.favoritos = new HashSet<Album>();
+		this.playlists = new HashMap<String, ArrayList<Musica>>();
 	}
 
 	/**
@@ -41,37 +41,40 @@ public class Perfil {
 	 *            O album a ser adicionado
 	 */
 	public void adicionaAlbum(Album album) {
-		this.albuns.add(album);
+		if (album != null)
+			albuns.add(album);
 	}
 
 	/**
-	 * Verifica se um album pertence ao perfil para adiciona-lo aos favoritos
+	 * Verifica se um album pertence ao perfil e adiciona aos favoritos
 	 * 
 	 * @param album
 	 *            O album a ser adicionado aos favoritos
 	 * @throws Exception 
+	 * 				Se o album nao pertencer ao perfil
 	 */
 	public void adicionaAosFavoritos(Album album) throws Exception {
-		if (!this.albuns.contains(album)) {
+		if (!albuns.contains(album)) {
 			throw new Exception("Nao pode adicionar " + album.getNome() + " aos favoritos pois nao pertence ao perfil.");
 		}
-		this.favoritos.add(album);
+		
+		favoritos.add(album);
 	}
 
 	/**
-	 * Procura um album na lista de albuns recebendo um nome
+	 * Procura um album na lista de albuns atraves do seu nome
 	 * 
 	 * @param nome
 	 *            O nome do album a ser procurado
-	 * @return albumProcurado se o album for encontrado, null se o album nao for
-	 *         encontrado
+	 * @return 
+	 * 			O album procurado se o album for encontrado, null se o album nao for encontrado
 	 */
 	public Album procuraAlbum(String nome) {
 		for (Album album : albuns) {
-			if (album.getNome().equals(nome)) {
+			if (album.getNome().equals(nome)) 
 				return album;
-			}
 		}
+		
 		return null;
 	}
 
@@ -79,33 +82,37 @@ public class Perfil {
 	 * Adiciona uma musica em uma playlist
 	 * 
 	 * @param nomePlaylist
-	 *            A playlist
+	 *            Nome da playlist que a musica sera adicionada
 	 * @param nomeAlbum
 	 *            O album que contem a musica
 	 * @param faixa
 	 *            O numero da musica no album
 	 * @throws Exception
 	 *             Se o album nao pertencer ao perfil
+	 *             Se a faixa for menor do que 1 ou maior do que o tamanho da quantidade de faixas do album
 	 */
 	public void adicionaPlaylist(String nomePlaylist, String nomeAlbum,
 			int faixa) throws Exception {
-		HashSet<Musica> atualPlaylist;
+		ArrayList<Musica> atualPlaylist;
 		Album atualAlbum;
 		Musica atualFaixa;
+		
+		if (faixa < 1) 
+			throw new Exception("Posicao da musica nao e valida");
 
-		if (this.playlists.containsKey(nomePlaylist)) {
-			atualPlaylist = this.playlists.get(nomePlaylist);
-
-		} else {
-			atualPlaylist = new HashSet<Musica>();
-		}
+		if (playlists.containsKey(nomePlaylist)) 
+			atualPlaylist = playlists.get(nomePlaylist);
+		else 
+			atualPlaylist = new ArrayList<Musica>();
 
 		atualAlbum = procuraAlbum(nomeAlbum);
 
-		if (atualAlbum == null) {
+		if (atualAlbum == null) 
 			throw new Exception("Album nao pertence ao perfil especificado.");
-
-		} else {
+		else {
+			if (faixa > atualAlbum.quantidadeFaixas())
+				throw new Exception("Posicao maior do que a quantidade de faixas");
+			
 			atualFaixa = atualAlbum.getFaixas().get(faixa - 1);
 
 			atualPlaylist.add(atualFaixa);
@@ -166,8 +173,10 @@ public class Perfil {
 	public boolean equals(Object obj) {
 		if (obj instanceof Perfil) {
 			Perfil outroPerfil = (Perfil) obj;
+			
 			return this.getNome().equals(outroPerfil.getNome());
 		}
+		
 		return false;
 	}
 
@@ -183,32 +192,16 @@ public class Perfil {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public ArrayList<Album> getAlbuns() {
 		return albuns;
 	}
 
-	public void setAlbuns(ArrayList<Album> albuns) {
-		this.albuns = albuns;
-	}
-
-	public ArrayList<Album> getFavoritos() {
+	public HashSet<Album> getFavoritos() {
 		return favoritos;
 	}
 
-	public void setFavoritos(ArrayList<Album> favoritos) {
-		this.favoritos = favoritos;
-	}
-
-	public Map<String, HashSet<Musica>> getPlaylists() {
+	public HashMap<String, ArrayList<Musica>> getPlaylists() {
 		return playlists;
-	}
-
-	public void setPlaylists(HashMap<String, HashSet<Musica>> playlists) {
-		this.playlists = playlists;
 	}
 
 	@Override

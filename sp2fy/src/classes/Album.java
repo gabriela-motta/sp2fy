@@ -28,18 +28,16 @@ public class Album implements Comparable<Album> {
 	public Album(String nome, String artista, int anoLancamento)
 			throws Exception {
 
-		if (nome.equals("")) {
+		if (nome.equals("")) 
 			throw new Exception("Titulo do album nao pode ser vazio.");
-		}
+		
 
-		if (artista.equals("")) {
+		if (artista.equals("")) 
 			throw new Exception("Nome do artista do album nao pode ser vazio.");
-		}
+		
 
-		if (anoLancamento < 0) {
-			throw new Exception(
-					"Ano de lancamento do album nao pode ser negativo.");
-		}
+		if (anoLancamento < 0) 
+			throw new Exception("Ano de lancamento do album nao pode ser negativo.");
 
 		this.nome = nome;
 		this.artista = artista;
@@ -54,26 +52,63 @@ public class Album implements Comparable<Album> {
 	 * @param musica
 	 *            A musica a ser adicionada
 	 * @throws Exception 
+	 * 			Se a musica ja estiver no album
 	 */
 	public void adicionaMusica(Musica musica) throws Exception {
-		if(this.faixas.contains(musica)){
+		if (faixas.contains(musica))
 			throw new Exception(musica.getNome() + " ja esta no album.");
-		}
-		this.faixas.add(musica);
-		this.duracaoTotal = this.duracaoTotal + musica.getDuracao();
+		
+		faixas.add(musica);
+		duracaoTotal += musica.getDuracao();
 	}
 
 	/**
-	 * Remove uma faixa do album, e diminui a duracao total do album
+	 * Remove uma faixa do album pela posicao que ela se encontra, e diminui a duracao total do album
 	 * 
 	 * @param numero
 	 *            O numero da faixa a ser removida
+	 * @throws Exception 
+	 * 				Se a posicao da musica for menor do que 1
 	 */
-	public void removeFaixa(int numero) {
+	public void removeFaixa(int numero) throws Exception {
+		if (numero < 1) 
+			throw new Exception("Posicao da musica nao e valida");
+		
+		if (faixas.isEmpty())
+			throw new Exception("Album esta vazio");
+		
+		if (numero > faixas.size())
+			throw new Exception("Posicao maior do que a quantidade de faixas");
+		
 		int posicao = numero - 1;
-		this.duracaoTotal = this.duracaoTotal
-				- this.faixas.get(posicao).getDuracao();
-		this.faixas.remove(posicao);
+		duracaoTotal -=	faixas.get(posicao).getDuracao();
+		faixas.remove(posicao);
+	}
+	
+	/**
+	 * Pesquisa uma musica pelo nome
+	 * 
+	 * @param nome
+	 * 			Nome da musica
+	 * @return
+	 * 			Se achar a musica retorna 'true', caso contrario retorna 'false'
+	 */
+	public boolean pesquisarMusica(String nome){
+		for (Musica musica : faixas){
+			if (musica.getNome().equals(nome))
+				return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 * 			A quantidade de faixas cadastradas no album
+	 */
+	public int quantidadeFaixas(){
+		return faixas.size();
 	}
 
 	/**
@@ -83,9 +118,11 @@ public class Album implements Comparable<Album> {
 	public boolean equals(Object obj) {
 		if (obj instanceof Album) {
 			Album outroAlbum = (Album) obj;
+			
 			return this.getArtista().equals(outroAlbum.getArtista())
 					&& this.getNome().equals(outroAlbum.getNome());
 		}
+		
 		return false;
 	}
 
@@ -116,40 +153,20 @@ public class Album implements Comparable<Album> {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getArtista() {
 		return artista;
-	}
-
-	public void setArtista(String artista) {
-		this.artista = artista;
 	}
 
 	public int getDuracaoTotal() {
 		return duracaoTotal;
 	}
 
-	public void setDuracaoTotal(int duracaoTotal) {
-		this.duracaoTotal = duracaoTotal;
-	}
-
 	public int getAnoLancamento() {
 		return anoLancamento;
 	}
 
-	public void setAnoLancamento(int anoLancamento) {
-		this.anoLancamento = anoLancamento;
-	}
-
 	public ArrayList<Musica> getFaixas() {
 		return faixas;
-	}
-
-	public void setFaixas(ArrayList<Musica> faixas) {
-		this.faixas = faixas;
 	}
 
 	@Override
