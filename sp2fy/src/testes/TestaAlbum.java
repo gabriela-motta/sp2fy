@@ -83,7 +83,15 @@ public class TestaAlbum {
 			Album tituloInvalido = new Album("", "Michael Jackson", 1987);
 			Assert.fail("Esperava excecao de nome vazio");
 		} catch (Exception e) {
-			Assert.assertEquals("Titulo do album nao pode ser vazio.",
+			Assert.assertEquals("Titulo do album nao pode ser nulo ou vazio.",
+					e.getMessage());
+		}
+		
+		try {
+			Album tituloInvalido = new Album(null, "Michael Jackson", 1987);
+			Assert.fail("Esperava excecao de nome vazio");
+		} catch (Exception e) {
+			Assert.assertEquals("Titulo do album nao pode ser nulo ou vazio.",
 					e.getMessage());
 		}
 
@@ -91,16 +99,24 @@ public class TestaAlbum {
 			Album artistaInvalido = new Album("Night Visions", "", 2012);
 			Assert.fail("Esperava excecao de artista vazio");
 		} catch (Exception e) {
-			Assert.assertEquals("Nome do artista do album nao pode ser vazio.",
+			Assert.assertEquals("Nome do artista do album nao pode ser nulo ou vazio.",
+					e.getMessage());
+		}
+		
+		try {
+			Album artistaInvalido = new Album("Night Visions", null, 2012);
+			Assert.fail("Esperava excecao de artista vazio");
+		} catch (Exception e) {
+			Assert.assertEquals("Nome do artista do album nao pode ser nulo ou vazio.",
 					e.getMessage());
 		}
 
 		try {
-			Album anoInvalido = new Album("Uptown Special", "Mark Ronson", -3);
+			Album anoInvalido = new Album("Uptown Special", "Mark Ronson", 1714);
 			Assert.fail("Esperava excecao de ano de lancamento negativo");
 		} catch (Exception e) {
 			Assert.assertEquals(
-					"Ano de lancamento do album nao pode ser negativo.",
+					"Ano de lancamento do album nao pode ser anterior a 1900.",
 					e.getMessage());
 		}
 	}
@@ -118,9 +134,16 @@ public class TestaAlbum {
 			bad.adicionaMusica(manInTheMirror);
 			Assert.assertEquals(2, bad.getFaixas().size());
 			Assert.assertEquals(9, bad.getDuracaoTotal());
-
+			
 		} catch (Exception e) {
 			Assert.assertEquals("Uptown Funk ja esta no album.", e.getMessage());
+		}
+		
+		try {
+			bad.adicionaMusica(null);
+			
+		} catch (Exception e) {
+			Assert.assertEquals("Nao pode adicionar musica nula.", e.getMessage());
 		}
 	}
 

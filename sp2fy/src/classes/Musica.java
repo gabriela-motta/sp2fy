@@ -1,7 +1,5 @@
 package classes;
 
-//114110443 - Gabriela Motta Oliveira - LAB 4 - Turma 3
-
 public class Musica {
 
 	private String nome;
@@ -22,15 +20,15 @@ public class Musica {
 	 *             negativa
 	 */
 	public Musica(String nome, int duracao, String genero) throws Exception {
-		if (nome.equals("")) 
-			throw new Exception("Titulo da musica nao pode ser vazio.");
-		
-		if (duracao < 0) 
+		if (nome == null || nome.trim().equals(""))
+			throw new Exception("Titulo da musica nao pode ser nulo ou vazio.");
+
+		if (duracao < 0)
 			throw new Exception("Duracao da musica nao pode ser negativa.");
-		
-		if (genero.equals("")) 
-			throw new Exception("Genero da musica nao pode ser vazio.");
-		
+
+		if (genero == null || genero.trim().equals(""))
+			throw new Exception("Genero da musica nao pode ser nulo ou vazio.");
+
 		this.nome = nome;
 		this.duracao = duracao;
 		this.genero = genero;
@@ -43,8 +41,8 @@ public class Musica {
 	public boolean equals(Object obj) {
 		if (obj instanceof Musica) {
 			Musica outraMusica = (Musica) obj;
-			
-			return this.getNome().equals(outraMusica.getNome())
+
+			return this.getTitulo().equals(outraMusica.getTitulo())
 					&& this.getDuracao() == outraMusica.getDuracao();
 		}
 		return false;
@@ -59,7 +57,7 @@ public class Musica {
 				+ this.genero;
 	}
 
-	public String getNome() {
+	public String getTitulo() {
 		return nome;
 	}
 

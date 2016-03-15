@@ -1,58 +1,58 @@
 package testes;
 
-//114110443 - Gabriela Motta Oliveira - LAB 4 - Turma 3
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
 
 import classes.Musica;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 public class TestaMusica {
-
-	private Musica chandelier;
-	private Musica elasticHeart;
-	private Musica cellophane;
-
-	@Before
-	public void setUp() {
-		try {
-			chandelier = new Musica("Chandelier", 3, "Pop");
-			elasticHeart = new Musica("Elastic Heart", 3, "Pop");
-			cellophane = new Musica("Cellophane", 4, "Pop");
-
-		} catch (Exception e) {
-			Assert.fail();
-		}
-	}
 
 	@Test
 	public void testMusica() {
 		try {
-			Assert.assertEquals("Chandelier", chandelier.getNome());
-			Assert.assertEquals(3, chandelier.getDuracao());
-			Assert.assertEquals("Pop", chandelier.getGenero());
-			Assert.assertEquals("Musica: Chandelier, 3 min, Pop",
-					chandelier.toString());
+			Musica chandelier = new Musica("Chandelier", 3, "Pop");
+			Musica elasticHeart = new Musica("Elastic Heart", 3, "Pop");
+			Musica cellophane = new Musica("Cellophane", 4, "Pop");
 
-			Assert.assertEquals("Elastic Heart", elasticHeart.getNome());
-			Assert.assertEquals(3, elasticHeart.getDuracao());
-			Assert.assertEquals("Pop", elasticHeart.getGenero());
-			Assert.assertEquals("Musica: Elastic Heart, 3 min, Pop",
-					elasticHeart.toString());
+			assertEquals("Chandelier", chandelier.getTitulo());
+			assertEquals(3, chandelier.getDuracao());
+			assertEquals("Pop", chandelier.getGenero());
 
-			Assert.assertEquals("Cellophane", cellophane.getNome());
-			Assert.assertEquals(4, cellophane.getDuracao());
-			Assert.assertEquals("Pop", cellophane.getGenero());
-			Assert.assertEquals("Musica: Cellophane, 4 min, Pop",
-					cellophane.toString());
+			assertEquals("Elastic Heart", elasticHeart.getTitulo());
+			assertEquals(3, elasticHeart.getDuracao());
+			assertEquals("Pop", elasticHeart.getGenero());
 
-			Musica chandelierRemix = new Musica("Chandelier", 3, "Eletronica");
-			Assert.assertEquals(chandelier, chandelierRemix);
-			Assert.assertFalse(chandelier.equals(elasticHeart));
+			assertEquals("Cellophane", cellophane.getTitulo());
+			assertEquals(4, cellophane.getDuracao());
+			assertEquals("Pop", cellophane.getGenero());
+
+			Musica chandelierRemix = new Musica("Chandelier", 3, "Pop");
+			assertEquals(chandelier, chandelierRemix);
+			assertFalse(chandelier.equals(cellophane));
 
 		} catch (Exception e) {
-			Assert.fail();
+			fail();// nao deveria ter lancado nenhuma Exception nesse teste.
+		}
+	}
+
+	@Test
+	public void testEquals() {
+		Musica chandelier;
+		try {
+			chandelier = new Musica("Chandelier", 3, "Pop");
+			Musica elasticHeart = new Musica("Elastic Heart", 3, "Pop");
+			Musica cellophane = new Musica("Cellophane", 4, "Pop");
+
+			assertEquals(chandelier, new Musica("Chandelier", 3, "Pop"));
+			assertEquals(chandelier, new Musica("Chandelier", 3, "Pop-rock"));
+			assertNotEquals(elasticHeart, chandelier);
+			assertNotEquals(elasticHeart, cellophane);
+		} catch (Exception e) {
+			fail("não deve lançar exceção aqui.");
 		}
 	}
 
@@ -60,26 +60,43 @@ public class TestaMusica {
 	public void testMusicaInvalida() {
 		try {
 			Musica tituloInvalido = new Musica("", 3, "Pop");
-			Assert.fail("Esperava excecao de nome vazio");
+			fail(); // se chegar aqui da erro, pois deveria lancar exception.
 		} catch (Exception e) {
-			Assert.assertEquals("Titulo da musica nao pode ser vazio.",
+			assertEquals("Titulo da musica nao pode ser nulo ou vazio.",
+					e.getMessage());
+		}
+
+		try {
+			Musica tituloInvalido = new Musica(null, 3, "Pop");
+			fail(); // se chegar aqui da erro, pois deveria lancar exception.
+		} catch (Exception e) {
+			assertEquals("Titulo da musica nao pode ser nulo ou vazio.",
 					e.getMessage());
 		}
 
 		try {
 			Musica duracaoInvalida = new Musica("Elastic Heart", -5, "Pop");
-			Assert.fail("Esperava excecao de duracao negativa");
+			fail(); // se chegar aqui da erro, pois deveria lancar exception.
 		} catch (Exception e) {
-			Assert.assertEquals("Duracao da musica nao pode ser negativa.",
+			assertEquals("Duracao da musica nao pode ser negativa.",
 					e.getMessage());
 		}
 
 		try {
 			Musica tipoInvalido = new Musica("Cellophane", 4, "");
-			Assert.fail("Esperava excecao de tipo vazio");
+			fail(); // se chegar aqui da erro, pois deveria lancar exception.
 		} catch (Exception e) {
-			Assert.assertEquals("Genero da musica nao pode ser vazio.",
+			assertEquals("Genero da musica nao pode ser nulo ou vazio.",
 					e.getMessage());
 		}
+
+		try {
+			Musica tipoInvalido = new Musica("Cellophane", 4, null);
+			fail(); // se chegar aqui da erro, pois deveria lancar exception.
+		} catch (Exception e) {
+			assertEquals("Genero da musica nao pode ser nulo ou vazio.",
+					e.getMessage());
+		}
+
 	}
 }

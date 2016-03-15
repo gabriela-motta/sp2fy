@@ -1,16 +1,14 @@
 package classes;
 
-//114110443 - Gabriela Motta Oliveira - LAB 4 - Turma 3
-
 import java.util.ArrayList;
 
 public class Album implements Comparable<Album> {
 
 	private String nome;
 	private String artista;
-	private int duracaoTotal;
 	private int anoLancamento;
 	private ArrayList<Musica> faixas;
+	private boolean isFavorito;
 
 	/**
 	 * Construtor de album
@@ -28,22 +26,22 @@ public class Album implements Comparable<Album> {
 	public Album(String nome, String artista, int anoLancamento)
 			throws Exception {
 
-		if (nome.equals("")) 
-			throw new Exception("Titulo do album nao pode ser vazio.");
+		if (nome == null || nome.trim().equals("")) 
+			throw new Exception("Titulo do album nao pode ser nulo ou vazio.");
 		
 
-		if (artista.equals("")) 
-			throw new Exception("Nome do artista do album nao pode ser vazio.");
+		if (artista == null || artista.trim().equals("")) 
+			throw new Exception("Nome do artista do album nao pode ser nulo ou vazio.");
 		
 
-		if (anoLancamento < 0) 
-			throw new Exception("Ano de lancamento do album nao pode ser negativo.");
+		if (anoLancamento <= 1900) 
+			throw new Exception("Ano de lancamento do album nao pode ser anterior a 1900.");
 
 		this.nome = nome;
 		this.artista = artista;
 		this.anoLancamento = anoLancamento;
-		this.duracaoTotal = 0;
 		this.faixas = new ArrayList<Musica>();
+		this.isFavorito = false;
 	}
 
 	/**
@@ -55,11 +53,13 @@ public class Album implements Comparable<Album> {
 	 * 			Se a musica ja estiver no album
 	 */
 	public void adicionaMusica(Musica musica) throws Exception {
+		if(musica == null){
+			throw new Exception("Nao pode adicionar musica nula.");
+		}
 		if (faixas.contains(musica))
-			throw new Exception(musica.getNome() + " ja esta no album.");
+			throw new Exception(musica.getTitulo() + " ja esta no album.");
 		
 		faixas.add(musica);
-		duracaoTotal += musica.getDuracao();
 	}
 
 	/**
@@ -81,7 +81,6 @@ public class Album implements Comparable<Album> {
 			throw new Exception("Posicao maior do que a quantidade de faixas");
 		
 		int posicao = numero - 1;
-		duracaoTotal -=	faixas.get(posicao).getDuracao();
 		faixas.remove(posicao);
 	}
 	
@@ -95,7 +94,7 @@ public class Album implements Comparable<Album> {
 	 */
 	public boolean pesquisarMusica(String nome){
 		for (Musica musica : faixas){
-			if (musica.getNome().equals(nome))
+			if (musica.getTitulo().equals(nome))
 				return true;
 		}
 		
@@ -158,7 +157,11 @@ public class Album implements Comparable<Album> {
 	}
 
 	public int getDuracaoTotal() {
-		return duracaoTotal;
+		int duracao = 0;
+		for (Musica musica : faixas) {
+			duracao = duracao + musica.getDuracao();
+		}
+		return duracao;
 	}
 
 	public int getAnoLancamento() {
