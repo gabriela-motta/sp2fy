@@ -8,7 +8,6 @@ import java.util.HashMap;
 public class Musiteca {
 
 	private ArrayList<Album> albuns;
-	private ArrayList<Album> favoritos;
 	private HashMap<String, Playlist> playlists;
 
 	/**
@@ -16,7 +15,6 @@ public class Musiteca {
 	 */
 	public Musiteca() {
 		this.albuns = new ArrayList<Album>();
-		this.favoritos = new ArrayList<Album>();
 		this.playlists = new HashMap<String, Playlist>();
 	}
 
@@ -45,9 +43,10 @@ public class Musiteca {
 
 	/**
 	 * Adiciona um album aos favoritos
+	 * @throws Exception 
 	 */
-	public void adicionaFavorito(Album album) {
-		this.favoritos.add(album);
+	public void adicionaFavorito(Album album) throws Exception {
+		album.setFavorito(true);
 	}
 
 	/**
@@ -117,6 +116,12 @@ public class Musiteca {
 	}
 
 	public ArrayList<Album> getFavoritos() {
+		ArrayList<Album> favoritos = new ArrayList<Album>();
+		for (Album album : albuns) {
+			if(album.isFavorito()){
+				favoritos.add(album);
+			}
+		}
 		return favoritos;
 	}
 

@@ -22,11 +22,13 @@ public class TestaPerfilPlaylist {
 	private Album eighteenMonths;
 
 	private Perfil gabriela;
+	private Perfil maria;
 
 	@Before
 	public void setUp() {
 		try {
 			gabriela = new Perfil("Gabriela");
+			maria = new Perfil("Maria");
 
 			colors = new Musica("Colors", 4, "EDM");
 			youngAgain = new Musica("Young Again", 5, "EDM");
@@ -43,6 +45,22 @@ public class TestaPerfilPlaylist {
 			Assert.fail();
 		}
 
+	}
+	
+	@Test
+	public void testFavorito(){
+		try {
+			gabriela.adicionaAlbum(listen);
+			maria.adicionaAlbum(listen);
+			
+			gabriela.adicionaAosFavoritos(listen);
+			
+			Assert.assertEquals(1, gabriela.getFavoritos().size());
+			Assert.assertEquals(0, maria.getFavoritos().size()); //deveria ser 0
+			
+		} catch (Exception e) {
+			Assert.fail();
+		}
 	}
 
 	@Test

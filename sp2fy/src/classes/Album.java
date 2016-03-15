@@ -8,7 +8,7 @@ public class Album implements Comparable<Album> {
 	private String artista;
 	private int anoLancamento;
 	private ArrayList<Musica> faixas;
-	private boolean isFavorito;
+	private boolean favorito;
 
 	/**
 	 * Construtor de album
@@ -41,7 +41,7 @@ public class Album implements Comparable<Album> {
 		this.artista = artista;
 		this.anoLancamento = anoLancamento;
 		this.faixas = new ArrayList<Musica>();
-		this.isFavorito = false;
+		this.favorito = false;
 	}
 
 	/**
@@ -179,6 +179,17 @@ public class Album implements Comparable<Album> {
 		result = prime * result + ((artista == null) ? 0 : artista.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
+	}
+
+	public boolean isFavorito(){
+		return this.favorito;
+	}
+	
+	public void setFavorito(boolean fav) throws Exception {
+		if (isFavorito()){
+			throw new Exception("Alguem ja marcou como favorito antes");
+		}
+		this.favorito = fav;		
 	}
 
 }
