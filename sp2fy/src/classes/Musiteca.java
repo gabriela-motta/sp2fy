@@ -21,9 +21,14 @@ public class Musiteca {
 	/**
 	 * Adiciona um album na lista
 	 * @param album
+	 * @throws Exception 
 	 */
-	public void adicionaAlbum(Album album) {
+	public boolean adicionaAlbum(Album album) throws Exception {
+		if(album == null){
+			throw new Exception("Nao pode adicionar album nulo");
+		}
 		this.albuns.add(album);
+		return true;
 	}
 
 	/**

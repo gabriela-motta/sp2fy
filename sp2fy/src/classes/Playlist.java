@@ -1,16 +1,16 @@
 package classes;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Playlist {
 
-	private HashSet<Musica> musicas;
+	private ArrayList<Musica> musicas;
 
 	/**
 	 * Construtor de Playlist
 	 */
 	public Playlist() {
-		this.musicas = new HashSet<Musica>();
+		this.musicas = new ArrayList<Musica>();
 	}
 
 	/**

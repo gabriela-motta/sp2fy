@@ -29,13 +29,10 @@ public class Perfil {
 	 * 
 	 * @param album
 	 *            O album a ser adicionado
+	 * @throws Exception 
 	 */
-	public boolean adicionaAlbum(Album album) {
-		if (album != null) {
-			musiteca.adicionaAlbum(album);
-			return true;
-		}
-		return false;
+	public boolean adicionaAlbum(Album album) throws Exception {
+		return musiteca.adicionaAlbum(album);
 	}
 
 	/**
