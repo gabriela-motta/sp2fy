@@ -1,7 +1,5 @@
 package testes;
 
-// 114110443 - Gabriela Motta Oliveira - LAB 4 - Turma 3
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

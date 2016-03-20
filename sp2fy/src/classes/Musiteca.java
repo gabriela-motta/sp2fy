@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class Musiteca {
 
 	private ArrayList<Album> albuns;
+	private ArrayList<Album> favoritos;
 	private HashMap<String, Playlist> playlists;
 
 	/**
@@ -15,6 +16,7 @@ public class Musiteca {
 	 */
 	public Musiteca() {
 		this.albuns = new ArrayList<Album>();
+		this.favoritos = new ArrayList<Album>();
 		this.playlists = new HashMap<String, Playlist>();
 	}
 
@@ -29,6 +31,17 @@ public class Musiteca {
 		}
 		this.albuns.add(album);
 		return true;
+	}
+	
+	public boolean removeAlbum(Album album){
+		for (Album outroAlbum : albuns) {
+			if(outroAlbum.equals(album)){
+				this.albuns.remove(album);
+				setFavoritos();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -52,6 +65,7 @@ public class Musiteca {
 	 */
 	public void adicionaFavorito(Album album) throws Exception {
 		album.setFavorito(true);
+		setFavoritos();
 	}
 
 	/**
@@ -121,13 +135,17 @@ public class Musiteca {
 	}
 
 	public ArrayList<Album> getFavoritos() {
-		ArrayList<Album> favoritos = new ArrayList<Album>();
+		setFavoritos();
+		return this.favoritos;
+	}
+
+	private void setFavoritos() {
+		this.favoritos = new ArrayList<Album>();
 		for (Album album : albuns) {
 			if(album.isFavorito()){
-				favoritos.add(album);
+				this.favoritos.add(album);
 			}
 		}
-		return favoritos;
 	}
 
 	public HashMap<String, Playlist> getPlaylists() {
@@ -139,6 +157,8 @@ public class Musiteca {
 	 */
 	public void ordenaAlbunsPorAno() {
 		Collections.sort(this.albuns);
+		setFavoritos();
+		Collections.sort(this.favoritos);
 	}
 
 	/**
@@ -180,5 +200,14 @@ public class Musiteca {
 			}
 		});
 
+	}
+
+	public boolean procuraAlbum(Album outroAlbum) {
+		for (Album album : albuns) {
+			if(album.equals(outroAlbum)){
+				return true;
+			}
+		}
+		return false;
 	}
 }
