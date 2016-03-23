@@ -59,13 +59,6 @@ public class Perfil {
 	public Album procuraAlbum(String nome) {
 		return musiteca.procuraAlbum(nome);
 	}
-	
-	/**
-	 * Procura um album na musiteca
-	 */
-	public boolean procuraAlbum(Album album) {
-		return musiteca.procuraAlbum(album);
-	}
 
 	/**
 	 * Adiciona uma musica em uma playlist da musiteca

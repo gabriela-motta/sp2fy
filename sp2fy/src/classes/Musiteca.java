@@ -33,7 +33,11 @@ public class Musiteca {
 		return true;
 	}
 	
-	public boolean removeAlbum(Album album){
+	
+	public boolean removeAlbum(Album album) throws Exception{
+		if(album == null){
+			throw new Exception("Nao pode remover album nulo");
+		}
 		for (Album outroAlbum : albuns) {
 			if(outroAlbum.equals(album)){
 				this.albuns.remove(album);
@@ -49,10 +53,14 @@ public class Musiteca {
 	 * 
 	 * @param albumProcurado
 	 * @return true se o album exite, false caso contrario
+	 * @throws Exception 
 	 */
-	public boolean contemAlbum(Album albumProcurado) {
+	public boolean contemAlbum(Album albumProcurado) throws Exception {
+		if(albumProcurado == null){
+			throw new Exception("Nao pode procurar album nulo");
+		}
 		for (Album album : albuns) {
-			if (album != null && album.equals(albumProcurado)) {
+			if (album.equals(albumProcurado)) {
 				return true;
 			}
 		}
@@ -64,6 +72,9 @@ public class Musiteca {
 	 * @throws Exception 
 	 */
 	public void adicionaFavorito(Album album) throws Exception {
+		if(album == null){
+			throw new Exception("Nao pode adicionar album nulo aos favoritos");
+		}
 		album.setFavorito(true);
 		setFavoritos();
 	}
@@ -82,7 +93,7 @@ public class Musiteca {
 	 *             que 1 ou maior do que o tamanho da quantidade de faixas do
 	 *             album
 	 */
-	public void adicionaPlaylist(String nomePlaylist, String nomeAlbum,
+	public boolean adicionaPlaylist(String nomePlaylist, String nomeAlbum,
 			int faixa) throws Exception {
 		Playlist atualPlaylist;
 		Album atualAlbum;
@@ -109,6 +120,7 @@ public class Musiteca {
 
 			atualPlaylist.adicionaMusica(atualFaixa);
 			this.playlists.put(nomePlaylist, atualPlaylist);
+			return true;
 		}
 
 	}
@@ -200,14 +212,5 @@ public class Musiteca {
 			}
 		});
 
-	}
-
-	public boolean procuraAlbum(Album outroAlbum) {
-		for (Album album : albuns) {
-			if(album.equals(outroAlbum)){
-				return true;
-			}
-		}
-		return false;
 	}
 }

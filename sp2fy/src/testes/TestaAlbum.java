@@ -1,7 +1,5 @@
 package testes;
 
-//114110443 - Gabriela Motta Oliveira - LAB 4 - Turma 3
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -158,6 +156,18 @@ public class TestaAlbum {
 			Assert.assertEquals(6, nightVisions.getDuracaoTotal());
 			Assert.assertEquals(2, nightVisions.getFaixas().size());
 
+		} catch (Exception e) {
+			Assert.fail();
+		}
+	}
+	
+	@Test
+	public void testPesquisarMusica(){
+		try {
+			nightVisions.adicionaMusica(demons);
+			
+			Assert.assertTrue(nightVisions.pesquisarMusica("Demons"));
+			Assert.assertFalse(nightVisions.pesquisarMusica("Radioactive"));
 		} catch (Exception e) {
 			Assert.fail();
 		}
